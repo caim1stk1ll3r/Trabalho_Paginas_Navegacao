@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{# Redefine o bloco 'titulo': aparece na aba do navegador #}
+{% block titulo %}Tabacaria Teste{% endblock %}
+
+
+{# Redefine o bloco 'conteudo': é aqui que fica o conteúdo único desta página #}
+{% block conteudo %}
+
+  <div class="row">
+
+    <div class="col-12 mb-4">
+      <h1 class="display-5">Bem-vindo à nossa tabacaria!!</h1>
+      <p class="lead text-muted">
+        Desenvolvido na disciplina Programação para Internet — FATEC Jahu
+      </p>
+      <hr>
+    </div>
+
+    {# Três cards de resumo usando o grid do Bootstrap #}
+    <div class="col-md-4 mb-3">
+      <div class="card border-primary h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📦</div>
+          <h5 class="card-title">Nossos Produtos</h5>
+          <p class="card-text text-muted">Veja os produtos disponíveis!!!</p>
+          <a href="/produtos" class="btn btn-primary">Ver produtos</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-success h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">👥</div>
+          <h5 class="card-title">Usuários</h5>
+          <p class="card-text text-muted">Visualize e gerencie os perfis de usuários.</p>
+          <a href="/perfil/admin" class="btn btn-success">Acessar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-warning h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📊</div>
+          <h5 class="card-title">Relatórios</h5>
+          <p class="card-text text-muted">Consulte dados gerenciais e dashboards.</p>
+          <a href="#" class="btn btn-warning">Em breve</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}

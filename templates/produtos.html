@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{# Redefine o bloco 'titulo': aparece na aba do navegador #}
+{% block titulo %}Nossos Produtos{% endblock %}
+
+
+{# Redefine o bloco 'conteudo': é aqui que fica o conteúdo único desta página #}
+{% block conteudo %}
+
+  <div class="row">
+
+    <div class="col-12 mb-4">
+      <h1 class="display-5">Bem-vindo à nossa tabacaria!!</h1>
+      <p class="lead text-muted">
+        Desenvolvido na disciplina Programação para Internet — FATEC Jahu
+      </p>
+      <hr>
+    </div>
+
+    {# Três cards de resumo usando o grid do Bootstrap #}
+    <div class="col-md-4 mb-3">
+      <div class="card border-primary h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📦</div>
+          <h5 class="card-title">Tabacos</h5>
+          <p class="card-text text-muted">Clássicos ou com sabores diferentes!</p>
+          <a href="/produtos" class="btn btn-primary">Tabacos!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-success h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">👥</div>
+          <h5 class="card-title">Acessórios</h5>
+          <p class="card-text text-muted">Tudo o que você precisa pra chapar o coco(n vai fka assim)</p>
+          <a href="/perfil/admin" class="btn btn-success">Acessórios!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-warning h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📊</div>
+          <h5 class="card-title">Vapes e Pods</h5>
+          <p class="card-text text-muted">Só pra quem é poser de nicotina.</p>
+          <a href="#" class="btn btn-warning">Vapes e Pods!</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
