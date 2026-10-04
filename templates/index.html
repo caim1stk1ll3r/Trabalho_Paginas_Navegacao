@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 
-
-{# Redefine o bloco 'titulo': aparece na aba do navegador #}
 {% block titulo %}Tabacaria Teste{% endblock %}
 
-
-{# Redefine o bloco 'conteudo': é aqui que fica o conteúdo único desta página #}
 {% block conteudo %}
 
   <div class="row">
@@ -18,7 +14,6 @@
       <hr>
     </div>
 
-    {# Três cards de resumo usando o grid do Bootstrap #}
     <div class="col-md-4 mb-3">
       <div class="card border-primary h-100">
         <div class="card-body text-center">
@@ -34,9 +29,9 @@
       <div class="card border-success h-100">
         <div class="card-body text-center">
           <div class="display-4 mb-2">👥</div>
-          <h5 class="card-title">Usuários</h5>
-          <p class="card-text text-muted">Visualize e gerencie os perfis de usuários.</p>
-          <a href="/perfil/admin" class="btn btn-success">Acessar</a>
+          <h5 class="card-title">Nossos clientes!</h5>
+          <p class="card-text text-muted">Lista dos clientes cadastrados na loja.</p>
+          <a href="/usuarios" class="btn btn-success">Acessar</a>
         </div>
       </div>
     </div>
