@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Início — {{ titulo }}{% endblock %}
+
+{% block conteudo %}
+
+  <div class="row">
+
+    <div class="col-12 mb-4">
+      <h1 class="display-5">{{ titulo }}</h1>
+      <p class="lead text-muted">{{ subtitulo }}</p>
+      <hr>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-primary h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📦</div>
+          <h5 class="card-title">Produtos</h5>
+          <p class="card-text text-muted">Veja o catálogo da tabacaria.</p>
+          <a href="{{ url_for('produtos') }}" class="btn btn-primary">Acessar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-success h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">👥</div>
+          <h5 class="card-title">Usuários</h5>
+          <p class="card-text text-muted">Consulte os usuários cadastrados.</p>
+          <a href="{{ url_for('usuarios') }}" class="btn btn-success">Acessar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card border-warning h-100">
+        <div class="card-body text-center">
+          <div class="display-4 mb-2">📝</div>
+          <h5 class="card-title">Cadastro</h5>
+          <p class="card-text text-muted">Crie um novo cadastro.</p>
+          <a href="{{ url_for('cadastro') }}" class="btn btn-warning">Acessar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}

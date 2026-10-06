@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Produtos — Tabacaria{% endblock %}
+
+{% block conteudo %}
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Produtos Cadastrados</h2>
+    <span class="badge bg-primary fs-6">{{ total }} produtos</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nome do Produto</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Estoque</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produto in produtos %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.categoria }}</td>
+          <td>R$ {{ "%.2f" | format(produto.preco) }}</td>
+
+          {# Cor da célula conforme o nível de estoque #}
+          {% if produto.estoque == 0 %}
+            <td class="table-danger text-center"><strong>Esgotado</strong></td>
+          {% elif produto.estoque <= 5 %}
+            <td class="table-warning text-center">{{ produto.estoque }} ⚠️</td>
+          {% else %}
+            <td class="table-success text-center">{{ produto.estoque }}</td>
+          {% endif %}
+
+          <td class="text-center">
+            {% if produto.ativo %}
+              <span class="badge bg-success">Ativo</span>
+            {% else %}
+              <span class="badge bg-secondary">Inativo</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+          <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+              Nenhum produto cadastrado.
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

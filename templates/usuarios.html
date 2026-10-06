@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Usuários — Tabacaria{% endblock %}
+
+{% block conteudo %}
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Usuários Cadastrados</h2>
+    <span class="badge bg-primary fs-6">{{ total }} usuários</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Username</th>
+          <th>E-mail</th>
+          <th>Perfil</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+            {% if usuario.perfil == 'admin' %}
+              <span class="badge bg-danger">Administrador</span>
+            {% elif usuario.perfil == 'editor' %}
+              <span class="badge bg-warning text-dark">Editor</span>
+            {% else %}
+              <span class="badge bg-primary">Usuário</span>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            {% if usuario.ativo %}
+              <span class="badge bg-success">Ativo</span>
+            {% else %}
+              <span class="badge bg-secondary">Inativo</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+          <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+              Nenhum usuário cadastrado.
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ url_for('cadastro') }}" class="btn btn-primary">Novo cadastro</a>
+
+{% endblock %}
