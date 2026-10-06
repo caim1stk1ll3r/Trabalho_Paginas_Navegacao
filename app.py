@@ -42,6 +42,18 @@ def cadastro():
         if not termos:
             erros.append('Você deve aceitar os termos de uso.')
 
+        # ===== PROCESSAMENTO OU EXIBIÇÃO DE ERROS =====
+        if erros:
+            for erro in erros:
+                flash(erro, 'danger')
+            return render_template('cadastro.html',
+                                nome=nome,
+                                email=email,
+                                nascimento=nascimento,
+                                termos=termos,
+                                perfil=perfil)
+
+        print(f'✅ Cadastro válido: {nome} | {email} | {nascimento} | {perfil}')
         flash(f'Cadastro de {nome} realizado com sucesso!', 'success')
 
         return redirect(url_for('pagina_inicial'))
