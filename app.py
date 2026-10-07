@@ -8,7 +8,6 @@ app.secret_key = 'chave-secreta-fatec-2026'
 
 @app.route('/')
 def pagina_inicial():
-    # Dados enviados ao template (Aula 03: dicionário + **dados)
     dados = {
         'titulo': 'Tabacaria',
         'subtitulo': 'Fumos, sedas, isqueiros e acessórios em um só lugar',
@@ -18,7 +17,6 @@ def pagina_inicial():
 
 @app.route('/produtos')
 def produtos():
-    # Lista de dicionários simulando os registros (Aula 03)
     lista = [
         {'id': 1, 'nome': 'Fumo de Corda',      'categoria': 'Fumos',      'preco': 12.50, 'estoque': 40, 'ativo': True},
         {'id': 2, 'nome': 'Seda Slim',          'categoria': 'Sedas',      'preco':  4.90, 'estoque': 85, 'ativo': True},
@@ -73,7 +71,6 @@ def cadastro():
 
         print(f'✅ Cadastro válido: {nome} | {email} | {username} | {nascimento} | {perfil}')
         flash(f'Cadastro de {nome} realizado com sucesso!', 'success')
-        # Padrão PRG: redirect após POST bem-sucedido (Aula 04)
         return redirect(url_for('pagina_inicial'))
 
     return render_template('cadastro.html')
@@ -81,7 +78,6 @@ def cadastro():
 
 @app.route('/usuarios')
 def usuarios():
-    # Lista simulada de usuários (Aula 03)
     lista = [
         {'nome': 'Administrador',  'username': 'admin', 'email': 'admin@tabacaria.com', 'perfil': 'admin',   'ativo': True},
         {'nome': 'João Silva',     'username': 'joao',  'email': 'joao@email.com',      'perfil': 'editor',  'ativo': True},
@@ -98,7 +94,6 @@ def processar():
     aceito_termos = request.form.get('termos', 'nao')
     nascimento_str = request.form['nascimento']
 
-    # request.form sempre devolve string: converte para data antes de calcular
     try:
         nascimento = datetime.strptime(nascimento_str, '%Y-%m-%d')
     except ValueError:
