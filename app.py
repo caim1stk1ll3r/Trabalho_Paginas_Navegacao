@@ -7,12 +7,25 @@ app.secret_key = 'chave-secreta-fatec-2026'
 
 
 @app.route('/')
-def pagina_inicial():
-    dados = {
-        'titulo': 'Tabacaria',
-        'subtitulo': 'Fumos, sedas, isqueiros e acessórios em um só lugar',
-    }
-    return render_template('index.html', **dados)
+def inicio():
+    return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/usuarios/listar')
+def listar_usuarios():
+    lista = [
+        {'nome': 'Administrador',  'username': 'admin', 'email': 'admin@tabacaria.com', 'perfil': 'admin',   'ativo': True},
+        {'nome': 'João Silva',     'username': 'joao',  'email': 'joao@email.com',      'perfil': 'editor',  'ativo': True},
+        {'nome': 'Maria Souza',    'username': 'maria', 'email': 'maria@email.com',     'perfil': 'usuario', 'ativo': False},
+    ]
+    return render_template('usuarios/listar_usuarios.html', usuarios=lista, total=len(lista))
+
+@app.route('/usuarios/inserir')
+def inserir_usuarios():
+    return render_template('cadastro.html')
 
 
 @app.route('/produtos')
@@ -71,19 +84,12 @@ def cadastro():
 
         print(f'✅ Cadastro válido: {nome} | {email} | {username} | {nascimento} | {perfil}')
         flash(f'Cadastro de {nome} realizado com sucesso!', 'success')
-        return redirect(url_for('pagina_inicial'))
+        return redirect(url_for('dashboard'))
 
     return render_template('cadastro.html')
 
 
-@app.route('/usuarios')
-def usuarios():
-    lista = [
-        {'nome': 'Administrador',  'username': 'admin', 'email': 'admin@tabacaria.com', 'perfil': 'admin',   'ativo': True},
-        {'nome': 'João Silva',     'username': 'joao',  'email': 'joao@email.com',      'perfil': 'editor',  'ativo': True},
-        {'nome': 'Maria Souza',    'username': 'maria', 'email': 'maria@email.com',     'perfil': 'usuario', 'ativo': False},
-    ]
-    return render_template('usuarios.html', usuarios=lista, total=len(lista))
+
 
 
 @app.route('/processar', methods=['POST'])

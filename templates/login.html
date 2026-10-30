@@ -1,0 +1,65 @@
+{% extends 'layout/base_limpa.html' %}
+
+{% block titulo %} ebaaa login {% endblock %}
+
+{% block conteudo %}
+
+<div class="row justify-content-center w-100">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-body p-4 p-sm-5">
+        <div class="text-center mb-4">
+          <div
+            class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle p-3 mb-3 shadow-sm">
+            <i class="bi bi-bullseye fs-1"></i>
+          </div>
+          <h3 class="fw-bold mb-1">Tabacaria</h3>
+          <p class="text-muted small">Acesse sua conta para gerenciar o sistema</p>
+        </div>
+
+        <form action="{{url_for('dashboard')}}" method="POST">
+          <div class="mb-3">
+            <label for="login-email" class="form-label fw-semibold">E-mail</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control bg-light border-start-0" id="login-email" required
+                value="admin@pokeadmin.com" placeholder="seu@email.com">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <label for="login-password" class="form-label fw-semibold mb-0">Senha</label>
+              <a href="recuperar-senha.html" class="text-decoration-none small text-primary">Esqueceu a senha?</a>
+            </div>
+            <div class="input-group mt-2">
+              <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-shield-lock"></i></span>
+              <input type="password" class="form-control bg-light border-start-0" id="login-password" required
+                value="123456" placeholder="••••••••">
+            </div>
+          </div>
+
+          <div class="mb-4 form-check">
+            <input type="checkbox" class="form-check-input" id="login-remember" checked>
+            <label class="form-check-label text-muted small" for="login-remember">Lembrar-me neste dispositivo</label>
+          </div>
+
+          <button type="submit" class="btn btn-danger w-100 py-2 fw-semibold shadow-sm mb-3">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Entrar no Sistema
+          </button>
+
+          <div class="text-center">
+            <a href="dashboard.html" class="btn btn-sm btn-outline-secondary w-100">
+              <i class="bi bi-magic me-1"></i> Entrada Rápida (Demo)
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="text-center mt-3 text-muted small">
+      Tabacaria © 2026
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'layout/base_menu.html' %}
 
 {% block titulo %}Cadastro — Tabacaria{% endblock %}
 
@@ -84,7 +84,7 @@
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-primary">✔ Cadastrar</button>
               <button type="reset" class="btn btn-outline-secondary">↺ Limpar</button>
-              <a href="{{ url_for('pagina_inicial') }}" class="btn btn-outline-danger">
+              <a href="{{ url_for('dashboard') }}" class="btn btn-outline-danger">
                 ✖ Cancelar
               </a>
             </div>
