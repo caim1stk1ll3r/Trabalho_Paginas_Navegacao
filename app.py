@@ -1,10 +1,22 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
-from datetime import datetime
+import os
+
+from dotenv import load_dotenv
+from flask import Flask, redirect, render_template, url_for, request
+from flask_wtf.csrf import CSRFProtect
+
+from db import execute_one
+
+load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY')
 
-app.secret_key = 'chave-secreta-fatec-2026'
+# Liga a proteção CSRF: todo formulário POST do sistema vai precisar do token
+CSRFProtect(app)
 
+# ==============================================================================
+# PÁGINAS PRINCIPAIS
+# ==============================================================================
 
 @app.route('/')
 def inicio():
@@ -13,6 +25,10 @@ def inicio():
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
+
+# ==============================================================================
+# USUARIOS
+# ==============================================================================
 
 @app.route('/usuarios/listar')
 def listar_usuarios():
@@ -27,6 +43,21 @@ def listar_usuarios():
 def inserir_usuarios():
     return render_template('cadastro.html')
 
+# ==============================================================================
+# PERFIS
+# ==============================================================================
+
+@app.route('/perfis/inserir', methods=['GET', 'POST'])
+def inserir_perfil():
+
+    if request.method == 'POST':
+        redirect(url_for(listar_perfis))
+
+    return render_template('perfis/perfil_form.html')
+
+@app.route('/perfis/listar')
+def listar_perfis():
+    return render_template('perfis/perfis_listar.html')
 
 @app.route('/produtos')
 def produtos():
@@ -88,10 +119,6 @@ def cadastro():
 
     return render_template('cadastro.html')
 
-
-
-
-
 @app.route('/processar', methods=['POST'])
 def processar():
     nome = request.form['nome']
@@ -110,6 +137,46 @@ def processar():
 
     return f'Dados recebidos: {nome}, {username}, {perfil}, termos: {aceito_termos}, {idade} anos'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ==============================================================================
+# TELAS DE ERROS
+# ==============================================================================
+
+@app.errorhandler(404)
+def pagina_nao_encontrada(erro):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def erro_no_servidor(erro):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
