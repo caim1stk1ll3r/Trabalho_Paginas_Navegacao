@@ -1,10 +1,12 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, url_for, request
+from flask import Flask, redirect, render_template, url_for, request, flash
 from flask_wtf.csrf import CSRFProtect
 
-from db import execute_one
+from db import execute_one, execute_query, execute_insert
+
+from mysql.connector import Error
 
 load_dotenv()
 
@@ -50,14 +52,41 @@ def inserir_usuarios():
 @app.route('/perfis/inserir', methods=['GET', 'POST'])
 def inserir_perfil():
 
+    nome = ''
+    descricao = ''
+
     if request.method == 'POST':
-        redirect(url_for(listar_perfis))
+        nome = request.form.get('nome').strip()
+        descricao = request.form.get('descricao').strip()   
 
-    return render_template('perfis/perfil_form.html')
+        try:
+            novo_id = execute_insert(
+                'INSERT INTO perfis (nome, descricao) VALUES(%s,%s)', (nome, descricao)
+            ) 
+            flash(f'Perfil {nome} cadastrado com o ID: {novo_id}', 'success')
+            return redirect(url_for('listar_perfis'))
 
-@app.route('/perfis/listar')
+        except Error as erro: 
+            if erro.errno == 1062: 
+                flash('Já existe um perfil com esse nome.', 'danger')
+            else: 
+                raise
+
+    return render_template('perfis/perfil_form.html', nome=nome, descricao=descricao)
+
+@app.route('/perfis')
 def listar_perfis():
-    return render_template('perfis/perfis_listar.html')
+    perfis = execute_query(
+        'SELECT id_perfil, nome, descricao, criado_em FROM perfis ORDER BY nome',
+        fetch=True
+    )
+
+    return render_template('perfis/perfis_listar.html', perfis=perfis)
+
+
+# ==============================================================================
+# PRODUTOS ETC
+# ==============================================================================
 
 @app.route('/produtos')
 def produtos():
